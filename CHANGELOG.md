@@ -1,3 +1,6 @@
+## 0.3.0
+Update dependencies
+
 ## 0.2.0+2
 Fix: fix analyser issue
 

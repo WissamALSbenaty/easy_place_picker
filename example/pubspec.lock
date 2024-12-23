@@ -172,18 +172,19 @@ packages:
     dependency: transitive
     description:
       name: google_api_headers
-      sha256: "1f80e123ef47073f2affb98596e9d7e5eeff97adc51e60c2d367e26f81469010"
+      sha256: "0df56841f6fdc4b9ee677afeaefc1a7f2b0ed0195d025118edba0d4d26d53e5c"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.0"
+    version: "4.3.1"
   google_huawei_availability:
     dependency: transitive
     description:
-      name: google_huawei_availability
-      sha256: "990124bb25e33d2c37ec89e72173dc9accaa029b17a701f6b20f55a520aaf875"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: c1277ecab7d443891ce750392cec845ffc515ecf
+      url: "https://github.com/easyhour/google_huawei_availability.git"
+    source: git
+    version: "1.3.0"
   google_maps:
     dependency: transitive
     description:
@@ -259,11 +260,12 @@ packages:
   huawei_map:
     dependency: transitive
     description:
-      name: huawei_map
-      sha256: c323720f3cdc1b12c360c77a97193da7824625ce7d81d89ce1a974acb18c4a71
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.11.2+304"
+      path: flutter-hms-map
+      ref: "9d47f5aaa11d4474b37b83e42d073f05ebaa2e24"
+      resolved-ref: "9d47f5aaa11d4474b37b83e42d073f05ebaa2e24"
+      url: "https://github.com/HMS-Core/hms-flutter-plugin"
+    source: git
+    version: "6.11.2+303"
   js:
     dependency: transitive
     description:
@@ -372,18 +374,18 @@ packages:
     dependency: transitive
     description:
       name: package_info_plus
-      sha256: da8d9ac8c4b1df253d1a328b7bf01ae77ef132833479ab40763334db13b91cce
+      sha256: "70c421fe9d9cc1a9a7f3b05ae56befd469fe4f8daa3b484823141a55442d858d"
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.1"
+    version: "8.1.2"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
       name: package_info_plus_platform_interface
-      sha256: ac1f4a4847f1ade8e6a87d1f39f5d7c67490738642e2542f559ec38c37489a66
+      sha256: a5ef9986efc7bf772f2696183a3992615baa76c1ffb1189318dd8803778fb05b
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   path:
     dependency: transitive
     description:
@@ -547,7 +549,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.2"
+    version: "0.3.0"
   uuid:
     dependency: transitive
     description:
@@ -590,4 +592,4 @@ packages:
     version: "5.5.4"
 sdks:
   dart: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.0"
+  flutter: ">=3.27.1"
