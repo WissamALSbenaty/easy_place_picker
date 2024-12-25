@@ -24,14 +24,8 @@ dependencies:
     sdk: flutter
 
   provider: ^6.1.2
-  google_huawei_availability:
-    git: https://github.com/easyhour/google_huawei_availability.git
-  # Waiting for https://github.com/HMS-Core/hms-flutter-plugin/issues/379
-  huawei_map:
-    git:
-      url: https://github.com/HMS-Core/hms-flutter-plugin
-      path: flutter-hms-map
-      ref: 9d47f5aaa11d4474b37b83e42d073f05ebaa2e24
+  flutter_hms_gms_availability: ^3.10.0
+  huawei_map: ^6.11.2+304
   google_api_headers: ^4.3.1
   flutter_google_maps_webservices: ^1.1.1
   google_maps_flutter: ^2.10.0

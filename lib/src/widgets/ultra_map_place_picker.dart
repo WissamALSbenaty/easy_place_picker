@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hms_gms_availability/flutter_hms_gms_availability.dart';
 import 'package:http/http.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
-import 'package:google_huawei_availability/google_huawei_availability.dart';
 import 'package:huawei_map/huawei_map.dart';
 import 'package:ultra_map_place_picker/src/widgets/ultra_place_picker.dart';
 import 'package:ultra_map_place_picker/ultra_map_place_picker.dart';
@@ -281,8 +281,8 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
 
   Future<PlaceProvider> getPlaceProvider() async {
     try {
-      isHuaweiDevice =
-          !(await GoogleHuaweiAvailability.isGoogleServiceAvailable ?? true);
+      isHuaweiDevice = !(await FlutterHmsGmsAvailability.isGmsAvailable) &&
+          (await FlutterHmsGmsAvailability.isHmsAvailable);
       if (isHuaweiDevice) {
         HuaweiMapInitializer.initializeMap();
       }

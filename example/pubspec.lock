@@ -94,6 +94,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flutter_hms_gms_availability:
+    dependency: transitive
+    description:
+      name: flutter_hms_gms_availability
+      sha256: e10cf8692d6265524ede42f2f0f22af66254dd34860b59491b22b34c0327f892
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.10.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -176,15 +184,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.3.1"
-  google_huawei_availability:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: c1277ecab7d443891ce750392cec845ffc515ecf
-      url: "https://github.com/easyhour/google_huawei_availability.git"
-    source: git
-    version: "1.3.0"
   google_maps:
     dependency: transitive
     description:
@@ -260,12 +259,11 @@ packages:
   huawei_map:
     dependency: transitive
     description:
-      path: flutter-hms-map
-      ref: "9d47f5aaa11d4474b37b83e42d073f05ebaa2e24"
-      resolved-ref: "9d47f5aaa11d4474b37b83e42d073f05ebaa2e24"
-      url: "https://github.com/HMS-Core/hms-flutter-plugin"
-    source: git
-    version: "6.11.2+303"
+      name: huawei_map
+      sha256: c323720f3cdc1b12c360c77a97193da7824625ce7d81d89ce1a974acb18c4a71
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.11.2+304"
   js:
     dependency: transitive
     description:
@@ -549,7 +547,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.3.0"
+    version: "0.2.0+2"
   uuid:
     dependency: transitive
     description:
