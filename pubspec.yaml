@@ -1,6 +1,6 @@
 name: ultra_map_place_picker
 description: "A Flutter package that simplifies location selection on maps, regardless of device type."
-version: 0.3.0
+version: 0.4.0
 homepage: https://github.com/WissamALSbenaty/Ultra-Map-Place-Picker
 
 repository: https://github.com/WissamALSbenaty/Ultra-Map-Place-Picker.git
@@ -26,7 +26,7 @@ dependencies:
   provider: ^6.1.2
   flutter_hms_gms_availability: ^3.10.0
   huawei_map: ^6.11.2+304
-  google_api_headers: ^4.3.1
+  google_api_headers: ^4.2.6
   flutter_google_maps_webservices: ^1.1.1
   google_maps_flutter: ^2.10.0
   geolocator: ^13.0.2
