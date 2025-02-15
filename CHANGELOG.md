@@ -1,6 +1,10 @@
-## 0.4.0
-Dow dependencies
+## 0.5.0
+Feat: Add onPressed in UltraMapThumbnail widget
+Fix: change the class name of SelectionDetails to SelectionDetailsWidget thanks to @mauriziopinotti
+Update dependencies
 
+## 0.4.0
+Downgrade dependencies
 
 ## 0.3.0
 Update dependencies
