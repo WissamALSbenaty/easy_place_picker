@@ -34,6 +34,7 @@ class UltraMapThumbnail extends StatelessWidget {
     this.initialZoomValue = 15,
     this.polygons = const {},
     this.polylines = const {},
+    this.onPressed
   });
 
   /// The Google Maps API key for Places API and Geocoding API usage.
@@ -104,36 +105,41 @@ class UltraMapThumbnail extends StatelessWidget {
   final double width;
   final BorderRadius borderRadius;
 
+  final void Function()? onPressed;
+
   @override
   Widget build(final BuildContext context) {
-    return SizedBox(
-      height: height,
-      width: width,
-      child: ClipRRect(
-        borderRadius: borderRadius,
-        child: UltraMapPlacePicker(
-          showPickedPlace: false,
-          enableSearching: false,
-          enableScrolling: false,
-          enableMapTypeButton: enableMapTypeButton,
-          enableMyLocationButton: enableMyLocationButton,
-          zoomGesturesEnabled: zoomGesturesEnabled,
-          initialZoomValue: initialZoomValue,
-          googleApiKey: googleApiKey,
-          initialPosition: initialPosition,
-          mapTypes: mapTypes,
-          myLocationButtonCooldown: 1,
-          zoomControlsEnabled: zoomControlsEnabled,
-          httpClient: httpClient,
-          proxyBaseUrl: proxyBaseUrl,
-          onLocationPermissionDenied: onLocationPermissionDenied,
-          pickArea: pickArea,
-          pinBuilder: pinBuilder,
-          polygons: polygons,
-          polylines: polylines,
+    return GestureDetector(
+      onTap: onPressed,
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: ClipRRect(
+          borderRadius: borderRadius,
+          child: UltraMapPlacePicker(
+            showPickedPlace: false,
+            enableSearching: false,
+            enableScrolling: false,
+            enableMapTypeButton: enableMapTypeButton,
+            enableMyLocationButton: enableMyLocationButton,
+            zoomGesturesEnabled: zoomGesturesEnabled,
+            initialZoomValue: initialZoomValue,
+            googleApiKey: googleApiKey,
+            initialPosition: initialPosition,
+            mapTypes: mapTypes,
+            myLocationButtonCooldown: 1,
+            zoomControlsEnabled: zoomControlsEnabled,
+            httpClient: httpClient,
+            proxyBaseUrl: proxyBaseUrl,
+            onLocationPermissionDenied: onLocationPermissionDenied,
+            pickArea: pickArea,
+            pinBuilder: pinBuilder,
+            polygons: polygons,
+            polylines: polylines,
+          ),
         ),
+        //  resizeToAvoidBottomInset: true, // only works in page mode, less flickery, remove if wrong offsets
       ),
-      //  resizeToAvoidBottomInset: true, // only works in page mode, less flickery, remove if wrong offsets
     );
   }
 }
