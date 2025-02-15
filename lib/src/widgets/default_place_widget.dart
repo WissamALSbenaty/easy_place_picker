@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SelectionDetails;
 import 'package:ultra_map_place_picker/src/enums.dart';
 import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
 import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
