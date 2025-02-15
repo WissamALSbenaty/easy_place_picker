@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart' hide SelectionDetails;
+import 'package:flutter/material.dart';
 import 'package:ultra_map_place_picker/src/enums.dart';
 import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
 import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
 import 'package:ultra_map_place_picker/src/widgets/floating_card.dart';
 import 'package:ultra_map_place_picker/src/widgets/map_loading_indicator.dart';
-import 'package:ultra_map_place_picker/src/widgets/selection_details.dart';
+import 'package:ultra_map_place_picker/src/widgets/selection_details_widget.dart';
 
 class DefaultPlaceWidget extends StatelessWidget {
   final PickResultModel? data;
@@ -35,7 +35,7 @@ class DefaultPlaceWidget extends StatelessWidget {
       color: Theme.of(context).cardColor,
       child: state == SearchingState.searching
           ? const MapLoadingIndicator()
-          : SelectionDetails(
+          : SelectionDetailsWidget(
               result: data!,
               pickArea: pickArea,
               outsideOfPickAreaText: outsideOfPickAreaText,

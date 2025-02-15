@@ -3,13 +3,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
 import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
 
-class SelectionDetails extends StatelessWidget {
+class SelectionDetailsWidget extends StatelessWidget {
   final PickResultModel result;
   final UltraCircleModel? pickArea;
   final ValueChanged<PickResultModel>? onPlacePicked;
   final String? selectText;
   final String? outsideOfPickAreaText;
-  const SelectionDetails(
+  const SelectionDetailsWidget(
       {super.key,
       required this.result,
       required this.pickArea,
