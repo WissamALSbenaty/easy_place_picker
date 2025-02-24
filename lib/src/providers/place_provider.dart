@@ -41,6 +41,7 @@ class PlaceProvider extends ChangeNotifier {
       this._zoomLevel,
       [this.mapTypes = UltraMapType.values]) {
     _mapType = mapTypes.first;
+    _previousZoomLevel = _zoomLevel;
     places = GoogleMapsPlaces(
       apiKey: apiKey,
       baseUrl: proxyBaseUrl,
@@ -86,8 +87,11 @@ class PlaceProvider extends ChangeNotifier {
   }
 
   double _zoomLevel;
+  late double _previousZoomLevel;
   double get zoomLevel => _zoomLevel;
   set zoomLevel(final double zoomLevel) {
+    if (zoomLevel == _previousZoomLevel) return;
+    _previousZoomLevel = _zoomLevel;
     _zoomLevel = zoomLevel;
     mapController.animateCamera(target: cameraPosition!, zoomLevel: _zoomLevel);
     notifyListeners();
