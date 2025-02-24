@@ -11,15 +11,16 @@ class PinWidgetSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Selector<PlaceProvider, PinState>(
-        selector: (final _, final provider) => provider.pinState,
-        builder: (final context, final state, final __) {
+      child: Selector<PlaceProvider, (PinState, double)>(
+        selector: (final _, final provider) =>
+            (provider.pinState, provider.zoomLevel),
+        builder: (final context, final data, final __) {
           if (pinBuilder == null) {
-            return DefaultPin(state: state);
+            return DefaultPin(state: data.$1);
           } else {
             return Builder(
                 builder: (final builderContext) =>
-                    pinBuilder!(builderContext, state));
+                    pinBuilder!(builderContext, data.$1, data.$2));
           }
         },
       ),

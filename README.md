@@ -14,10 +14,7 @@ and the Flutter guide for
 #### A Flutter package that simplifies location selection on maps, regardless of device type.<br>This package offers seamless location selection for users on both Google Maps-enabled devices and those that are not, such as Huawei devices.
 
 ## What's new 
-* Now you can disable scrolling by passing ```enableScrolling:false```
-* New widget added to show map in list tiles  ```UltraMapThumbnail```
-* Added ```onLocationPermissionDenied``` parameter which allows to handle current location button if user hasn't given the access by showing custom dialog for example
-
+* Add double zoomLevel parameter to PinBuilder and IntroModalWidgetBuilder , this allows you to build these widgets differently when the zoom value changes , for example you want to force user to choose location within zoom value 
 ## Motivation
 Repeating the features because of the different device type is time-wasting right?
 <br>this package makes selecting from the map so much easier regardless the map type!

@@ -25,12 +25,13 @@ class PlaceBuilderSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Selector<PlaceProvider,
-        (PickResultModel?, SearchingState, bool, PinState)>(
+        (PickResultModel?, SearchingState, bool, PinState, double)>(
       selector: (final _, final provider) => (
         provider.selectedPlace,
         provider.placeSearchingState,
         provider.isSearchBarFocused,
-        provider.pinState
+        provider.pinState,
+        provider.zoomLevel,
       ),
       builder: (final context, final data, final __) {
         if (data.$1 == null ||
@@ -51,7 +52,7 @@ class PlaceBuilderSelector extends StatelessWidget {
           } else {
             return Builder(
                 builder: (final builderContext) => selectedPlaceWidgetBuilder!(
-                    builderContext, data.$1, data.$2, data.$3));
+                    builderContext, data.$1, data.$2, data.$3, data.$5));
           }
         }
       },

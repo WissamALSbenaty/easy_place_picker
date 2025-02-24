@@ -295,6 +295,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         widget.proxyBaseUrl,
         widget.httpClient,
         headers,
+        widget.initialZoomValue,
         widget.mapTypes(isHuaweiDevice));
     provider.sessionToken = const Uuid().v4();
     provider.desiredAccuracy = widget.desiredLocationAccuracy;

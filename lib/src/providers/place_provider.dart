@@ -38,6 +38,7 @@ class PlaceProvider extends ChangeNotifier {
       final String? proxyBaseUrl,
       final Client? httpClient,
       final Map<String, dynamic> apiHeaders,
+      this._zoomLevel,
       [this.mapTypes = UltraMapType.values]) {
     _mapType = mapTypes.first;
     places = GoogleMapsPlaces(
@@ -81,6 +82,14 @@ class PlaceProvider extends ChangeNotifier {
   Timer? get debounceTimer => _debounceTimer;
   set debounceTimer(final Timer? timer) {
     _debounceTimer = timer;
+    notifyListeners();
+  }
+
+  double _zoomLevel;
+  double get zoomLevel => _zoomLevel;
+  set zoomLevel(final double zoomLevel) {
+    _zoomLevel = zoomLevel;
+    mapController.animateCamera(target: cameraPosition!, zoomLevel: _zoomLevel);
     notifyListeners();
   }
 

@@ -236,6 +236,7 @@ class UltraMap extends StatelessWidget {
               onCameraMove: (final gm.CameraPosition position) {
                 provider.setCameraPosition(
                     UltraLocationModel.fromGoogleLatLng(position.target));
+                provider.zoomLevel = position.zoom;
                 onCameraMove?.call(
                     UltraLocationModel.fromGoogleLatLng(position.target));
               },

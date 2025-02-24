@@ -1,3 +1,6 @@
+## 0.6.0
+Feat: Add double zoomLevel parameter to PinBuilder and IntroModalWidgetBuilder
+
 ## 0.5.0+1
 Feat: Add onPressed in UltraMapThumbnail widget
 Fix: change the class name of SelectionDetails to SelectionDetailsWidget thanks to @mauriziopinotti
