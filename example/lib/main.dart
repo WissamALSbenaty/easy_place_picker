@@ -35,7 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
       initialPosition: UltraLocationModel(25.32134, 21.241421),
       googleApiKey: 'your key',
       mapTypes: (_) => UltraMapType.values,
-      pinBuilder: (_, __, zoom) => Text('$zoom'),
+      pinBuilder: (_, __, zoom) {
+        return Text('$zoom');
+      },
+      selectedPlaceWidgetBuilder: (_, __, ___, ____, zoom) {
+        return Container();
+      },
     );
   }
 }

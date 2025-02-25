@@ -1,4 +1,4 @@
-## 0.6.0+1
+## 0.6.1
 Feat: Add double zoomLevel parameter to PinBuilder and IntroModalWidgetBuilder
 
 ## 0.5.0+1

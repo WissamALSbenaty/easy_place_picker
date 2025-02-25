@@ -93,7 +93,6 @@ class PlaceProvider extends ChangeNotifier {
     if (zoomLevel == _previousZoomLevel) return;
     _previousZoomLevel = _zoomLevel;
     _zoomLevel = zoomLevel;
-    mapController.animateCamera(target: cameraPosition!, zoomLevel: _zoomLevel);
     notifyListeners();
   }
 
@@ -163,16 +162,17 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  moveTo(final double latitude, final double longitude) async {
+  animateCamera(final double latitude, final double longitude,
+      final double zoomLevel) async {
     await mapController.animateCamera(
-        target: UltraLocationModel(latitude, longitude),
-        zoomLevel: await mapController.getZoomLevel());
+        target: UltraLocationModel(latitude, longitude), zoomLevel: zoomLevel);
   }
 
   moveToCurrentPosition() async {
     if (currentPosition == null) {
       return;
     }
-    await moveTo(currentPosition!.latitude, currentPosition!.longitude);
+    await animateCamera(
+        currentPosition!.latitude, currentPosition!.longitude, zoomLevel);
   }
 }

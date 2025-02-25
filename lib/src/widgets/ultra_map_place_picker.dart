@@ -438,8 +438,10 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
     // Prevents searching again by camera movement.
     provider!.isAutoCompleteSearching = true;
 
-    await provider!.moveTo(provider!.selectedPlace!.geometry!.location.lat,
-        provider!.selectedPlace!.geometry!.location.lng);
+    await provider!.animateCamera(
+        provider!.selectedPlace!.geometry!.location.lat,
+        provider!.selectedPlace!.geometry!.location.lng,
+        provider!.zoomLevel);
 
     if (provider == null) {
       return;
