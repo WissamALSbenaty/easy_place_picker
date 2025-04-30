@@ -1,3 +1,6 @@
+## 0.7.0
+Chore: update dependencies 
+
 ## 0.6.1
 Feat: Add double zoomLevel parameter to PinBuilder and IntroModalWidgetBuilder
 
