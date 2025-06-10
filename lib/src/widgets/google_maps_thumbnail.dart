@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:ultra_map_place_picker/ultra_map_place_picker.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 
-class UltraMapThumbnail extends StatelessWidget {
-  const UltraMapThumbnail(
+class GoogleMapsThumbnail extends StatelessWidget {
+  const GoogleMapsThumbnail(
       {required this.initialPosition,
       required this.googleApiKey,
       required this.mapTypes,
@@ -18,7 +19,7 @@ class UltraMapThumbnail extends StatelessWidget {
       this.proxyBaseUrl,
       this.httpClient,
       this.pinBuilder,
-      this.initialMapType = UltraMapType.normal,
+      this.initialMapType = MapType.normal,
       this.enableMapTypeButton = true,
       this.enableMyLocationButton = true,
       this.usePinPointingSearch = true,
@@ -40,13 +41,13 @@ class UltraMapThumbnail extends StatelessWidget {
   final String googleApiKey;
 
   /// The initial location to center the map on.
-  final UltraLocationModel initialPosition;
+  final LatLng initialPosition;
 
   /// The desired accuracy for the user's location.
   final LocationAccuracy desiredLocationAccuracy;
   final void Function()? onLocationPermissionDenied;
 
-  final UltraMapType initialMapType;
+  final MapType initialMapType;
   final bool enableMapTypeButton;
   final bool enableMyLocationButton;
   final bool enableScrolling;
@@ -59,11 +60,11 @@ class UltraMapThumbnail extends StatelessWidget {
   final String? region;
 
   final double initialZoomValue;
-  final List<UltraMapType> Function(bool isHuaweiDevice) mapTypes;
+  final List<MapType> mapTypes;
 
   /// If set the picker can only pick addresses in the given circle area.
   /// The section will be highlighted.
-  final UltraCircleModel? pickArea;
+  final Circle? pickArea;
 
   /// optional - builds customized pin widget which indicates current pointing position.
   ///
@@ -92,13 +93,13 @@ class UltraMapThumbnail extends StatelessWidget {
   /// Callback method for when the map is ready to be used.
   ///
   /// Used to receive a [GoogleMapController] for this [GoogleMap].
-  final void Function(UltraMapController)? onMapCreated;
+  final void Function(GoogleMapController)? onMapCreated;
 
   /// Called when the map type has been changed.
-  final Function(UltraMapType)? onMapTypeChanged;
+  final Function(MapType)? onMapTypeChanged;
 
-  final Set<UltraPolygonModel> polygons;
-  final Set<UltraPolylineModel> polylines;
+  final Set<Polygon> polygons;
+  final Set<Polyline> polylines;
 
   final double height;
   final double width;
@@ -115,7 +116,7 @@ class UltraMapThumbnail extends StatelessWidget {
         width: width,
         child: ClipRRect(
           borderRadius: borderRadius,
-          child: UltraMapPlacePicker(
+          child: GoogleMapsPlacePicker(
             showPickedPlace: false,
             enableSearching: false,
             enableScrolling: false,

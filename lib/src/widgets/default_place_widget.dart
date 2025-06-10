@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ultra_map_place_picker/src/enums.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
-import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
-import 'package:ultra_map_place_picker/src/widgets/floating_card.dart';
-import 'package:ultra_map_place_picker/src/widgets/map_loading_indicator.dart';
-import 'package:ultra_map_place_picker/src/widgets/selection_details_widget.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/src/enums.dart';
+import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
+import 'package:google_maps_place_picker/src/widgets/floating_card.dart';
+import 'package:google_maps_place_picker/src/widgets/map_loading_indicator.dart';
+import 'package:google_maps_place_picker/src/widgets/selection_details_widget.dart';
 
 class DefaultPlaceWidget extends StatelessWidget {
   final PickResultModel? data;
   final SearchingState state;
-  final UltraCircleModel? pickArea;
+  final Circle? pickArea;
   final String? outsideOfPickAreaText;
   final String? selectedText;
   final ValueChanged<PickResultModel>? onPlacePicked;

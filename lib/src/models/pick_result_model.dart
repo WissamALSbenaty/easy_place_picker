@@ -1,6 +1,5 @@
 import 'package:flutter_google_maps_webservices/geocoding.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_location_model.dart';
 
 class PickResultModel {
   PickResultModel({
@@ -132,8 +131,6 @@ class PickResultModel {
       reviews: result.reviews,
     );
   }
-  UltraLocationModel get toUltraLocationModel =>
-      UltraLocationModel.fromGoogleLocation(geometry!.location);
 
   String get formattedString {
     String result = '';

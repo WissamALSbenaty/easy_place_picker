@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart' as lc;
 import 'package:permission_handler/permission_handler.dart' as ph;
-import 'package:ultra_map_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
+import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
 
 class PermissionsHandlerModule extends IPermissionsHandlerModule {
   @override

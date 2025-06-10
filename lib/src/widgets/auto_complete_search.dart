@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
-import 'package:ultra_map_place_picker/src/enums.dart';
-import 'package:ultra_map_place_picker/src/widgets/prediction_tile.dart';
-import 'package:ultra_map_place_picker/src/widgets/rounded_frame.dart';
+import 'package:google_maps_place_picker/src/enums.dart';
+import 'package:google_maps_place_picker/src/widgets/prediction_tile.dart';
+import 'package:google_maps_place_picker/src/widgets/rounded_frame.dart';
 import 'package:provider/provider.dart';
-import 'package:ultra_map_place_picker/src/providers/search_provider.dart';
-import 'package:ultra_map_place_picker/src/controllers/auto_complete_search_controller.dart';
-import 'package:ultra_map_place_picker/src/widgets/text_clear_icon.dart';
-import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
+import 'package:google_maps_place_picker/src/providers/search_provider.dart';
+import 'package:google_maps_place_picker/src/controllers/auto_complete_search_controller.dart';
+import 'package:google_maps_place_picker/src/widgets/text_clear_icon.dart';
+import 'package:google_maps_place_picker/src/providers/place_provider.dart';
 
 class AutoCompleteSearch extends StatefulWidget {
   const AutoCompleteSearch(
@@ -141,7 +141,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
         : Container();
   }
 
-  _onSearchInputChange() {
+  void _onSearchInputChange() {
     if (!mounted) {
       return;
     }
@@ -176,14 +176,14 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     });
   }
 
-  _onFocusChanged() {
+  void _onFocusChanged() {
     final PlaceProvider provider = PlaceProvider.of(context, listen: false);
     provider.isSearchBarFocused = focus.hasFocus;
     provider.debounceTimer?.cancel();
     provider.placeSearchingState = SearchingState.idle;
   }
 
-  _searchPlace(final String searchTerm) {
+  void _searchPlace(final String searchTerm) {
     provider.prevSearchTerm = searchTerm;
 
     clearOverlay();
@@ -197,14 +197,14 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     _performAutoCompleteSearch(searchTerm);
   }
 
-  clearOverlay() {
+  void clearOverlay() {
     if (overlayEntry != null) {
       overlayEntry!.remove();
       overlayEntry = null;
     }
   }
 
-  _displayOverlay(final Widget overlayChild) {
+  void _displayOverlay(final Widget overlayChild) {
     clearOverlay();
 
     final RenderBox? appBarRenderBox =
@@ -269,7 +269,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     );
   }
 
-  _performAutoCompleteSearch(final String searchTerm) async {
+  Future<void> _performAutoCompleteSearch(final String searchTerm) async {
     final PlaceProvider provider = PlaceProvider.of(context, listen: false);
 
     if (searchTerm.isNotEmpty) {
@@ -303,12 +303,12 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     }
   }
 
-  clearText() {
+  void clearText() {
     provider.searchTerm = '';
     controller.clear();
   }
 
-  resetSearchBar() {
+  void resetSearchBar() {
     clearText();
     focus.unfocus();
   }

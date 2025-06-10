@@ -1,22 +1,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_hms_gms_availability/flutter_hms_gms_availability.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/src/widgets/pin_place_picker.dart';
+
 import 'package:http/http.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
-import 'package:huawei_map/huawei_map.dart';
-import 'package:ultra_map_place_picker/src/widgets/ultra_place_picker.dart';
-import 'package:ultra_map_place_picker/ultra_map_place_picker.dart';
-import 'package:uuid/uuid.dart';
-import 'package:ultra_map_place_picker/src/controllers/auto_complete_search_controller.dart';
-import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:ultra_map_place_picker/src/widgets/map_search_bar.dart';
 
-class UltraMapPlacePicker extends StatefulWidget {
-  const UltraMapPlacePicker({
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:uuid/uuid.dart';
+import 'package:google_maps_place_picker/src/controllers/auto_complete_search_controller.dart';
+import 'package:google_maps_place_picker/src/providers/place_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:google_maps_place_picker/src/widgets/map_search_bar.dart';
+
+class GoogleMapsPlacePicker extends StatefulWidget {
+  const GoogleMapsPlacePicker({
     required this.initialPosition,
     required this.googleApiKey,
     required this.mapTypes,
@@ -39,7 +40,7 @@ class UltraMapPlacePicker extends StatefulWidget {
     this.introModalWidgetBuilder,
     this.autoCompleteDebounceInMilliseconds = 500,
     this.cameraMoveDebounceInMilliseconds = 100,
-    this.initialMapType = UltraMapType.normal,
+    this.initialMapType = MapType.normal,
     this.enableMapTypeButton = true,
     this.enableMyLocationButton = true,
     this.myLocationButtonCooldown = 10,
@@ -81,7 +82,7 @@ class UltraMapPlacePicker extends StatefulWidget {
   final String googleApiKey;
 
   /// The initial location to center the map on.
-  final UltraLocationModel initialPosition;
+  final LatLng initialPosition;
 
   /// Whether to use the user's current location as the initial position.
   final bool? useCurrentLocation;
@@ -109,7 +110,7 @@ class UltraMapPlacePicker extends StatefulWidget {
   final int autoCompleteDebounceInMilliseconds;
   final int cameraMoveDebounceInMilliseconds;
 
-  final UltraMapType initialMapType;
+  final MapType initialMapType;
   final bool enableMapTypeButton;
   final bool enableMyLocationButton;
   final bool enableScrolling;
@@ -129,13 +130,13 @@ class UltraMapPlacePicker extends StatefulWidget {
   final String? region;
 
   final double initialZoomValue;
-  final List<UltraMapType> Function(bool isHuaweiDevice) mapTypes;
+  final List<MapType> mapTypes;
 
   final void Function()? onLocationPermissionDenied;
 
   /// If set the picker can only pick addresses in the given circle area.
   /// The section will be highlighted.
-  final UltraCircleModel? pickArea;
+  final Circle? pickArea;
 
   /// If true the [body] and the scaffold's floating widgets should size
   /// themselves to avoid the onscreen keyboard whose height is defined by the
@@ -219,7 +220,7 @@ class UltraMapPlacePicker extends StatefulWidget {
   /// Callback method for when the map is ready to be used.
   ///
   /// Used to receive a [GoogleMapController] for this [GoogleMap].
-  final void Function(UltraMapController)? onMapCreated;
+  final void Function(GoogleMapController?)? onMapCreated;
 
   /// Called when the camera starts moving.
   ///
@@ -236,14 +237,14 @@ class UltraMapPlacePicker extends StatefulWidget {
   ///
   /// This may be called as often as once every frame and should
   /// not perform expensive operations.
-  final void Function(UltraLocationModel)? onCameraMove;
+  final void Function(LatLng)? onCameraMove;
 
   /// Called when camera movement has ended, there are no pending
   /// animations and the user has stopped interacting with the map.
   final Function(PlaceProvider)? onCameraIdle;
 
   /// Called when the map type has been changed.
-  final Function(UltraMapType)? onMapTypeChanged;
+  final Function(MapType)? onMapTypeChanged;
 
   /// Toggle on & off zoom gestures
   final bool zoomGesturesEnabled;
@@ -251,21 +252,20 @@ class UltraMapPlacePicker extends StatefulWidget {
   /// Allow user to make visible the zoom button
   final bool zoomControlsEnabled;
 
-  final Set<UltraMarkerModel> markers;
-  final Set<UltraPolygonModel> polygons;
-  final Set<UltraPolylineModel> polylines;
+  final Set<Marker> markers;
+  final Set<Polygon> polygons;
+  final Set<Polyline> polylines;
   @override
   PlacePickerState createState() => PlacePickerState();
 }
 
-class PlacePickerState extends State<UltraMapPlacePicker> {
+class PlacePickerState extends State<GoogleMapsPlacePicker> {
   GlobalKey appBarKey = GlobalKey();
   late final Future<PlaceProvider> _futureProvider;
   PlaceProvider? provider;
   AutoCompleteSearchController searchBarController =
       AutoCompleteSearchController();
   bool showIntroModal = true;
-  bool isHuaweiDevice = false;
 
   @override
   void initState() {
@@ -280,13 +280,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
   }
 
   Future<PlaceProvider> getPlaceProvider() async {
-    try {
-      isHuaweiDevice = !(await FlutterHmsGmsAvailability.isGmsAvailable) &&
-          (await FlutterHmsGmsAvailability.isHmsAvailable);
-      if (isHuaweiDevice) {
-        HuaweiMapInitializer.initializeMap();
-      }
-    } catch (_) {}
     final Map<String, String> headers =
         await const GoogleApiHeaders().getHeaders();
     final PlaceProvider provider = PlaceProvider(
@@ -296,10 +289,10 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         widget.httpClient,
         headers,
         widget.initialZoomValue,
-        widget.mapTypes(isHuaweiDevice));
+        widget.mapTypes);
     provider.sessionToken = const Uuid().v4();
     provider.desiredAccuracy = widget.desiredLocationAccuracy;
-    provider.setUltraMapType(widget.initialMapType);
+    provider.setMapType(widget.initialMapType);
     if (widget.useCurrentLocation == true) {
       await provider.updateCurrentLocation(
           gracefully: widget.ignoreLocationPermissionErrors);
@@ -370,8 +363,8 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                         : null,
                     body: _buildMap(provider!.currentPosition == null
                         ? widget.initialPosition
-                        : UltraLocationModel.fromPosition(
-                            provider!.currentPosition!)),
+                        : LatLng(provider!.currentPosition!.latitude,
+                            provider!.currentPosition!.longitude)),
                   ),
                   if (showIntroModal && widget.introModalWidgetBuilder != null)
                     widget.introModalWidgetBuilder!(context, () {
@@ -414,7 +407,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         ));
   }
 
-  _pickPrediction(final Prediction prediction) async {
+  Future<void> _pickPrediction(final Prediction prediction) async {
     provider!.placeSearchingState = SearchingState.searching;
 
     final PlacesDetailsResponse response =
@@ -449,11 +442,10 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
     provider!.placeSearchingState = SearchingState.idle;
   }
 
-  Widget _buildMap(final UltraLocationModel initialTarget) {
-    return UltraPlacePicker(
+  Widget _buildMap(final LatLng initialTarget) {
+    return PinPlacePicker(
       showPickedPlace: widget.showPickedPlace,
       enableScrolling: widget.enableScrolling,
-      isHuaweiDevice: isHuaweiDevice,
       polygons: widget.polygons,
       polylines: widget.polylines,
       markers: widget.markers,
@@ -481,7 +473,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         if (provider == null) {
           return;
         }
-        provider!.switchUltraMapType();
+        provider!.switchMapType();
         if (widget.onMapTypeChanged != null) {
           widget.onMapTypeChanged!(provider!.mapType);
         }

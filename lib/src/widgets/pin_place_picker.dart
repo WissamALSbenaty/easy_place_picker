@@ -2,27 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_google_maps_webservices/geocoding.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_location_model.dart';
-import 'package:ultra_map_place_picker/src/controllers/ultra_map_controller.dart';
-import 'package:ultra_map_place_picker/src/enums.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_marker_model.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_polygon_model.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_polyline_model.dart';
-import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
-import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
-import 'package:ultra_map_place_picker/src/typedefs.dart';
-import 'package:ultra_map_place_picker/src/widgets/map_icons.dart';
-import 'package:ultra_map_place_picker/src/widgets/pin_widget_selector.dart';
-import 'package:ultra_map_place_picker/src/widgets/place_builder_selector.dart';
-import 'package:ultra_map_place_picker/src/widgets/ultra_map.dart';
-import 'package:ultra_map_place_picker/src/widgets/zoom_buttons.dart';
 
-class UltraPlacePicker extends StatelessWidget {
-  const UltraPlacePicker({
+import 'package:google_maps_place_picker/src/enums.dart';
+import 'package:google_maps_place_picker/src/providers/place_provider.dart';
+import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
+import 'package:google_maps_place_picker/src/typedefs.dart';
+import 'package:google_maps_place_picker/src/widgets/map_icons.dart';
+import 'package:google_maps_place_picker/src/widgets/pin_widget_selector.dart';
+import 'package:google_maps_place_picker/src/widgets/place_builder_selector.dart';
+import 'package:google_maps_place_picker/src/widgets/ultra_map.dart';
+import 'package:google_maps_place_picker/src/widgets/zoom_buttons.dart';
+
+class PinPlacePicker extends StatelessWidget {
+  const PinPlacePicker({
     required this.appBarKey,
-    required this.isHuaweiDevice,
     required this.initialTarget,
     super.key,
     this.selectedPlaceWidgetBuilder,
@@ -59,7 +54,7 @@ class UltraPlacePicker extends StatelessWidget {
     this.enableScrolling = true,
   });
 
-  final UltraLocationModel initialTarget;
+  final LatLng initialTarget;
   final GlobalKey appBarKey;
 
   final SelectedPlaceWidgetBuilder? selectedPlaceWidgetBuilder;
@@ -67,7 +62,7 @@ class UltraPlacePicker extends StatelessWidget {
 
   final ValueChanged<String>? onSearchFailed;
   final VoidCallback? onMoveStart;
-  final void Function(UltraMapController)? onMapCreated;
+  final void Function(GoogleMapController?)? onMapCreated;
   final VoidCallback? onToggleMapType;
   final VoidCallback? onMyLocation;
   final ValueChanged<PickResultModel>? onPlacePicked;
@@ -78,20 +73,19 @@ class UltraPlacePicker extends StatelessWidget {
 
   final bool? usePinPointingSearch;
   final bool? usePlaceDetailSearch;
-  final bool isHuaweiDevice;
   final bool enableScrolling;
   final bool showPickedPlace;
   final bool? selectInitialPosition;
 
   final String? language;
-  final UltraCircleModel? pickArea;
+  final Circle? pickArea;
 
   final bool? forceSearchOnZoomChanged;
   final bool? hidePlaceDetailsWhenDraggingPin;
 
   /// GoogleMap pass-through events:
   final Function(PlaceProvider)? onCameraMoveStarted;
-  final void Function(UltraLocationModel)? onCameraMove;
+  final void Function(LatLng)? onCameraMove;
   final Function(PlaceProvider)? onCameraIdle;
 
   // strings
@@ -106,11 +100,11 @@ class UltraPlacePicker extends StatelessWidget {
   /// Use never scrollable scroll-view with maximum dimensions to prevent unnecessary re-rendering.
   final bool fullMotion;
 
-  final Set<UltraPolygonModel> polygons;
-  final Set<UltraPolylineModel> polylines;
-  final Set<UltraMarkerModel> markers;
+  final Set<Polygon> polygons;
+  final Set<Polyline> polylines;
+  final Set<Marker> markers;
 
-  _searchByCameraLocation(final PlaceProvider provider) async {
+  Future<void> _searchByCameraLocation(final PlaceProvider provider) async {
     // We don't want to search location again if camera location is changed by zooming in/out.
     if (forceSearchOnZoomChanged == false &&
         provider.prevCameraPosition != null &&
@@ -220,12 +214,11 @@ class UltraPlacePicker extends StatelessWidget {
   }
 
   Widget buildMapWidgetSelector(BuildContext context) =>
-      Selector<PlaceProvider, UltraMapType>(
+      Selector<PlaceProvider, MapType>(
           selector: (final _, final provider) => provider.mapType,
-          builder: (final _, final mapType, final __) => UltraMap(
+          builder: (final _, final mapType, final __) => MapWidget(
                 enableScrolling: enableScrolling,
                 provider: PlaceProvider.of(context, listen: false),
-                isHuaweiDevice: isHuaweiDevice,
                 initialTarget: initialTarget,
                 mapType: mapType,
                 searchByCameraLocation: _searchByCameraLocation,

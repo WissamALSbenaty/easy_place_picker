@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_location_model.dart';
-import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/src/providers/place_provider.dart';
 import 'package:provider/provider.dart';
 
 class ZoomButtons extends StatelessWidget {
@@ -9,7 +9,7 @@ class ZoomButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PlaceProvider provider = PlaceProvider.of(context, listen: false);
-    return Selector<PlaceProvider, UltraLocationModel?>(
+    return Selector<PlaceProvider, LatLng?>(
       selector: (final _, final provider) => provider.cameraPosition,
       builder: (final context, final data, final __) => data != null
           ? Positioned(
@@ -29,8 +29,8 @@ class ZoomButtons extends StatelessWidget {
                           icon: const Icon(Icons.add),
                           onPressed: () async {
                             double? currentZoomLevel =
-                                await provider.mapController.getZoomLevel();
-                            currentZoomLevel = currentZoomLevel + 2;
+                                await provider.mapController?.getZoomLevel();
+                            currentZoomLevel = (currentZoomLevel ?? 14) + 2;
                             await provider.animateCamera(data.latitude,
                                 data.longitude, currentZoomLevel);
                           }),
@@ -39,8 +39,8 @@ class ZoomButtons extends StatelessWidget {
                           icon: const Icon(Icons.remove),
                           onPressed: () async {
                             double? currentZoomLevel =
-                                await provider.mapController.getZoomLevel();
-                            currentZoomLevel = currentZoomLevel - 2;
+                                await provider.mapController?.getZoomLevel();
+                            currentZoomLevel = (currentZoomLevel ?? 14) - 2;
                             if (currentZoomLevel < 0) {
                               currentZoomLevel = 0;
                             }

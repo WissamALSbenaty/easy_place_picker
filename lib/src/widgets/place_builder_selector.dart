@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/src/providers/place_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:ultra_map_place_picker/src/widgets/default_place_widget.dart';
-import 'package:ultra_map_place_picker/ultra_map_place_picker.dart';
+import 'package:google_maps_place_picker/src/widgets/default_place_widget.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 
 class PlaceBuilderSelector extends StatelessWidget {
   final SelectedPlaceWidgetBuilder? selectedPlaceWidgetBuilder;
   final bool? hidePlaceDetailsWhenDraggingPin;
 
-  final UltraCircleModel? pickArea;
+  final Circle? pickArea;
   final String? outsideOfPickAreaText;
   final String? selectedText;
   final ValueChanged<PickResultModel>? onPlacePicked;

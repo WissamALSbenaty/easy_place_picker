@@ -6,16 +6,14 @@ import 'package:flutter_google_maps_webservices/geocoding.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
-import 'package:huawei_map/huawei_map.dart';
 import 'package:provider/provider.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_location_model.dart';
-import 'package:ultra_map_place_picker/src/controllers/ultra_map_controller.dart';
-import 'package:ultra_map_place_picker/src/enums.dart';
-import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
-import 'package:ultra_map_place_picker/src/third_parities_modules/abstract/i_live_location_module.dart';
-import 'package:ultra_map_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
-import 'package:ultra_map_place_picker/src/third_parities_modules/concrete/live_location_module.dart';
-import 'package:ultra_map_place_picker/src/third_parities_modules/concrete/permissions_handler_module.dart';
+
+import 'package:google_maps_place_picker/src/enums.dart';
+import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
+import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_live_location_module.dart';
+import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
+import 'package:google_maps_place_picker/src/third_parities_modules/concrete/live_location_module.dart';
+import 'package:google_maps_place_picker/src/third_parities_modules/concrete/permissions_handler_module.dart';
 
 class PlaceProvider extends ChangeNotifier {
   late GoogleMapsPlaces places;
@@ -30,7 +28,7 @@ class PlaceProvider extends ChangeNotifier {
   LocationAccuracy? desiredAccuracy;
   bool isAutoCompleteSearching = false;
 
-  final List<UltraMapType> mapTypes;
+  final List<MapType> mapTypes;
 
   PlaceProvider(
       final String apiKey,
@@ -39,7 +37,7 @@ class PlaceProvider extends ChangeNotifier {
       final Client? httpClient,
       final Map<String, dynamic> apiHeaders,
       this._zoomLevel,
-      [this.mapTypes = UltraMapType.values]) {
+      [this.mapTypes = MapType.values]) {
     _mapType = mapTypes.first;
     _previousZoomLevel = _zoomLevel;
     places = GoogleMapsPlaces(
@@ -96,15 +94,15 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  UltraLocationModel? _previousCameraPosition;
-  UltraLocationModel? get prevCameraPosition => _previousCameraPosition;
-  setPrevCameraPosition(final UltraLocationModel? prePosition) {
+  LatLng? _previousCameraPosition;
+  LatLng? get prevCameraPosition => _previousCameraPosition;
+  void setPrevCameraPosition(final LatLng? prePosition) {
     _previousCameraPosition = prePosition;
   }
 
-  UltraLocationModel? _currentCameraPosition;
-  UltraLocationModel? get cameraPosition => _currentCameraPosition;
-  setCameraPosition(final UltraLocationModel? newPosition) {
+  LatLng? _currentCameraPosition;
+  LatLng? get cameraPosition => _currentCameraPosition;
+  void setCameraPosition(final LatLng? newPosition) {
     _currentCameraPosition = newPosition;
   }
 
@@ -122,15 +120,9 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  final UltraMapController _mapController = UltraMapController();
-  UltraMapController get mapController => _mapController;
+  GoogleMapController? mapController;
   set googleController(final GoogleMapController? controller) {
-    _mapController.completeGoogleController(controller);
-    notifyListeners();
-  }
-
-  set huaweiController(final HuaweiMapController? controller) {
-    _mapController.completeHuaweiController(controller);
+    Completer().complete(controller);
     notifyListeners();
   }
 
@@ -148,27 +140,27 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  late UltraMapType _mapType;
-  UltraMapType get mapType => _mapType;
-  setUltraMapType(final UltraMapType mapType, {final bool notify = false}) {
+  late MapType _mapType;
+  MapType get mapType => _mapType;
+  void setMapType(final MapType mapType, {final bool notify = false}) {
     _mapType = mapType;
     if (notify) {
       notifyListeners();
     }
   }
 
-  switchUltraMapType() {
+  void switchMapType() {
     _mapType = mapTypes[(mapTypes.indexOf(_mapType) + 1) % mapTypes.length];
     notifyListeners();
   }
 
-  animateCamera(final double latitude, final double longitude,
+  Future<void> animateCamera(final double latitude, final double longitude,
       final double zoomLevel) async {
-    await mapController.animateCamera(
-        target: UltraLocationModel(latitude, longitude), zoomLevel: zoomLevel);
+    await mapController?.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(latitude, longitude), zoom: zoomLevel)));
   }
 
-  moveToCurrentPosition() async {
+  Future<void> moveToCurrentPosition() async {
     if (currentPosition == null) {
       return;
     }

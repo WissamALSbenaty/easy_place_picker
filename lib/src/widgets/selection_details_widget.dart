@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
-import 'package:ultra_map_place_picker/src/models/pick_result_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
 
 class SelectionDetailsWidget extends StatelessWidget {
   final PickResultModel result;
-  final UltraCircleModel? pickArea;
+  final Circle? pickArea;
   final ValueChanged<PickResultModel>? onPlacePicked;
   final String? selectText;
   final String? outsideOfPickAreaText;
@@ -19,14 +19,13 @@ class SelectionDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool canBePicked = pickArea == null ||
-        pickArea!.toGoogleCircle.radius <= 0 ||
+    final bool canBePicked = (pickArea?.radius ?? 0) <= 0 ||
         Geolocator.distanceBetween(
                 pickArea!.center.latitude,
                 pickArea!.center.longitude,
                 result.geometry!.location.lat,
                 result.geometry!.location.lng) <=
-            pickArea!.toGoogleCircle.radius;
+            pickArea!.radius;
     final WidgetStateColor buttonColor = WidgetStateColor.resolveWith(
         (final states) => canBePicked ? Colors.lightGreen : Colors.red);
 
