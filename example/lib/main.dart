@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return GoogleMapsPlacePicker(
       initialPosition: LatLng(25.32134, 21.241421),
-      googleApiKey: 'AIzaSyDm-4DvaIA-u4khkl5C-UkzNDkrEthGOB8',
+      googleApiKey: 'Your key',
       mapTypes: MapType.values,
       pinBuilder: (_, __, zoom) {
         return Text('$zoom');
