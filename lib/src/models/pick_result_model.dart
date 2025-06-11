@@ -1,5 +1,6 @@
 import 'package:flutter_google_maps_webservices/geocoding.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PickResultModel {
   PickResultModel({
@@ -131,7 +132,7 @@ class PickResultModel {
       reviews: result.reviews,
     );
   }
-
+  LatLng get latLng => LatLng(geometry!.location.lat, geometry!.location.lng);
   String get formattedString {
     String result = '';
     final List<AddressComponent> toShowComponents = addressComponents
