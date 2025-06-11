@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/src/providers/place_provider.dart';
+import 'package:easy_place_picker/src/providers/place_provider.dart';
 import 'package:provider/provider.dart';
 
 class ZoomButtons extends StatelessWidget {

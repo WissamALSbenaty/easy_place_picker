@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
+import 'package:easy_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
 
-import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_live_location_module.dart';
-import 'package:google_maps_place_picker/src/third_parities_modules/concrete/permissions_handler_module.dart';
+import 'package:easy_place_picker/src/third_parities_modules/abstract/i_live_location_module.dart';
+import 'package:easy_place_picker/src/third_parities_modules/concrete/permissions_handler_module.dart';
 
 class LiveLocationModule extends ILiveLocationModule {
   final IPermissionsHandlerModule permissionsHandlerModule =

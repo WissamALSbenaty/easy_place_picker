@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_place_picker/src/enums.dart';
-import 'package:google_maps_place_picker/src/widgets/animated_pin.dart';
+import 'package:easy_place_picker/src/enums.dart';
+import 'package:easy_place_picker/src/widgets/animated_pin.dart';
 
 class DefaultPin extends StatelessWidget {
   final PinState state;

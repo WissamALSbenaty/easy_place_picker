@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
+import 'package:easy_place_picker/src/models/pick_result_model.dart';
 
 class SelectionDetailsWidget extends StatelessWidget {
   final PickResultModel result;

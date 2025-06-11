@@ -1,9 +1,9 @@
-name: google_maps_place_picker
+name: easy_place_picker
 description: "A Flutter package that simplifies location selection on maps, regardless of device type."
 version: 0.0.1
-homepage: https://github.com/WissamALSbenaty/Ultra-Map-Place-Picker
+homepage: https://github.com/WissamALSbenaty/easy_place_picker
 
-repository: https://github.com/WissamALSbenaty/Ultra-Map-Place-Picker.git
+repository: https://github.com/WissamALSbenaty/easy_place_picker
 topics:
   - google-maps-flutter
   - map

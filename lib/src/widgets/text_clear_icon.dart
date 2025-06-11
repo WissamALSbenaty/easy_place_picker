@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_place_picker/src/providers/search_provider.dart';
+import 'package:easy_place_picker/src/providers/search_provider.dart';
 import 'package:provider/provider.dart';
 
 class TextClearIcon extends StatelessWidget {

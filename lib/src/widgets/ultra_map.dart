@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:google_maps_place_picker/src/enums.dart';
-import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
-import 'package:google_maps_place_picker/src/providers/place_provider.dart';
+import 'package:easy_place_picker/src/enums.dart';
+import 'package:easy_place_picker/src/models/pick_result_model.dart';
+import 'package:easy_place_picker/src/providers/place_provider.dart';
 
 class MapWidget extends StatelessWidget {
   final PlaceProvider provider;

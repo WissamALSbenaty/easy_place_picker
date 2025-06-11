@@ -8,12 +8,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
-import 'package:google_maps_place_picker/src/enums.dart';
-import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
-import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_live_location_module.dart';
-import 'package:google_maps_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
-import 'package:google_maps_place_picker/src/third_parities_modules/concrete/live_location_module.dart';
-import 'package:google_maps_place_picker/src/third_parities_modules/concrete/permissions_handler_module.dart';
+import 'package:easy_place_picker/src/enums.dart';
+import 'package:easy_place_picker/src/models/pick_result_model.dart';
+import 'package:easy_place_picker/src/third_parities_modules/abstract/i_live_location_module.dart';
+import 'package:easy_place_picker/src/third_parities_modules/abstract/i_permissions_handler_module.dart';
+import 'package:easy_place_picker/src/third_parities_modules/concrete/live_location_module.dart';
+import 'package:easy_place_picker/src/third_parities_modules/concrete/permissions_handler_module.dart';
 
 class PlaceProvider extends ChangeNotifier {
   late GoogleMapsPlaces places;

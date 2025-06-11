@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:easy_place_picker/easy_place_picker.dart';
 
 typedef SelectedPlaceWidgetBuilder = Widget Function(
     BuildContext context,

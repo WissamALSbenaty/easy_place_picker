@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:easy_place_picker/easy_place_picker.dart';
 
-class GoogleMapsThumbnail extends StatelessWidget {
-  const GoogleMapsThumbnail(
+class EasyThumbnail extends StatelessWidget {
+  const EasyThumbnail(
       {required this.initialPosition,
       required this.googleApiKey,
       required this.mapTypes,
@@ -116,7 +116,7 @@ class GoogleMapsThumbnail extends StatelessWidget {
         width: width,
         child: ClipRRect(
           borderRadius: borderRadius,
-          child: GoogleMapsPlacePicker(
+          child: EasyPlacePicker(
             showPickedPlace: false,
             enableSearching: false,
             enableScrolling: false,

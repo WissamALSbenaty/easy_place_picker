@@ -39,11 +39,11 @@ you only need to add this simple snippet to show the default sample
 
 ```dart
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:easy_flutter/easy_flutter.dart';
 
 @override
 Widget build(BuildContext context) {
-  return GoogleMapsPlacePicker(
+  return EasyPlacePicker(
     googleApiKey: 'MY KEY',
     initialPosition: LatLng(25.1974767426511, 55.279669543133615),
     mapTypes: MapType.values,

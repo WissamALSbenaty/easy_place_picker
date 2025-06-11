@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:google_maps_place_picker/src/widgets/auto_complete_search.dart';
+import 'package:easy_place_picker/src/widgets/auto_complete_search.dart';
 
 class AutoCompleteSearchController extends ChangeNotifier {
   AutoCompleteSearchState? _autoCompleteSearch;

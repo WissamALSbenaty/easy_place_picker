@@ -5,15 +5,15 @@ import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:google_maps_place_picker/src/enums.dart';
-import 'package:google_maps_place_picker/src/providers/place_provider.dart';
-import 'package:google_maps_place_picker/src/models/pick_result_model.dart';
-import 'package:google_maps_place_picker/src/typedefs.dart';
-import 'package:google_maps_place_picker/src/widgets/map_icons.dart';
-import 'package:google_maps_place_picker/src/widgets/pin_widget_selector.dart';
-import 'package:google_maps_place_picker/src/widgets/place_builder_selector.dart';
-import 'package:google_maps_place_picker/src/widgets/ultra_map.dart';
-import 'package:google_maps_place_picker/src/widgets/zoom_buttons.dart';
+import 'package:easy_place_picker/src/enums.dart';
+import 'package:easy_place_picker/src/providers/place_provider.dart';
+import 'package:easy_place_picker/src/models/pick_result_model.dart';
+import 'package:easy_place_picker/src/typedefs.dart';
+import 'package:easy_place_picker/src/widgets/map_icons.dart';
+import 'package:easy_place_picker/src/widgets/pin_widget_selector.dart';
+import 'package:easy_place_picker/src/widgets/place_builder_selector.dart';
+import 'package:easy_place_picker/src/widgets/ultra_map.dart';
+import 'package:easy_place_picker/src/widgets/zoom_buttons.dart';
 
 class PinPlacePicker extends StatelessWidget {
   const PinPlacePicker({

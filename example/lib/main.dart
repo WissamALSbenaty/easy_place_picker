@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:easy_place_picker/easy_place_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return GoogleMapsPlacePicker(
+    return EasyPlacePicker(
       initialPosition: LatLng(25.32134, 21.241421),
       googleApiKey: 'Your key',
       mapTypes: MapType.values,

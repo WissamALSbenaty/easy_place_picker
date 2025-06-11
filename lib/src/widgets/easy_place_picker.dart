@@ -2,22 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/src/widgets/pin_place_picker.dart';
+import 'package:easy_place_picker/src/widgets/pin_place_picker.dart';
 
 import 'package:http/http.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:easy_place_picker/easy_place_picker.dart';
 import 'package:uuid/uuid.dart';
-import 'package:google_maps_place_picker/src/controllers/auto_complete_search_controller.dart';
-import 'package:google_maps_place_picker/src/providers/place_provider.dart';
+import 'package:easy_place_picker/src/controllers/auto_complete_search_controller.dart';
+import 'package:easy_place_picker/src/providers/place_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:google_maps_place_picker/src/widgets/map_search_bar.dart';
+import 'package:easy_place_picker/src/widgets/map_search_bar.dart';
 
-class GoogleMapsPlacePicker extends StatefulWidget {
-  const GoogleMapsPlacePicker({
+class EasyPlacePicker extends StatefulWidget {
+  const EasyPlacePicker({
     required this.initialPosition,
     required this.googleApiKey,
     required this.mapTypes,
@@ -259,7 +259,7 @@ class GoogleMapsPlacePicker extends StatefulWidget {
   PlacePickerState createState() => PlacePickerState();
 }
 
-class PlacePickerState extends State<GoogleMapsPlacePicker> {
+class PlacePickerState extends State<EasyPlacePicker> {
   GlobalKey appBarKey = GlobalKey();
   late final Future<PlaceProvider> _futureProvider;
   PlaceProvider? provider;
